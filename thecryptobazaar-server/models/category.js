@@ -18,15 +18,6 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type:DataTypes.STRING
     },
-    allowNull: false,
-    validate: {
-      notNull: {
-        msg: 'Name Category cannot be empty'
-      },
-      notEmpty:{
-        msg: "Name Category cannot be empty"
-      }
-    }
 
   }, {
     sequelize,
