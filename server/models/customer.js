@@ -11,15 +11,59 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Customer.hasMany(models.Cart)
+      Customer.hasMany(models.Transaction)
     }
   }
   Customer.init({
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
-    role: DataTypes.STRING,
-    address: DataTypes.STRING,
-    phoneNumber: DataTypes.STRING,
-    gender: DataTypes.STRING
+    email: {
+      type:DataTypes.STRING,
+      allowNull:false,
+      unique: {
+        msg:"Email already in used"
+      },
+      validate:{
+        notNull:{
+          msg: "Email cannot be empty"
+        },
+        notEmpty: {
+          msg: "Email cannot be empty"
+        }
+      }
+    },
+    password:{
+      type:DataTypes.STRING,
+      allowNull: false,
+      validate:{
+        notNull:{
+          msg: "Password cannot be empty"
+        },
+        notEmpty:{
+          msg: "Password cannot be empty"
+        }
+      }
+    },
+    role: {
+      type:DataTypes.STRING,
+    },
+    address: {
+      type:DataTypes.STRING,
+    },
+    phoneNumber: {
+      type:DataTypes.STRING,
+      allowNull:false,
+      validate:{
+        notNull:{
+          msg: "Phone Number cannot be empty"
+        },
+        notEmpty: {
+          msg: "Phone Number cannot be empty"
+        }
+      }
+    },
+    gender: {
+      type: DataTypes.STRING
+    }
   }, {
     sequelize,
     modelName: 'Customer',

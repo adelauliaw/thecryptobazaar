@@ -11,18 +11,68 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      User.hasMany(models.Product)
     }
   }
   User.init({
-    username: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
-    role: DataTypes.STRING,
-    phoneNumber: DataTypes.STRING,
-    address: DataTypes.STRING
+    cartId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'Cart ID cannot be empty'
+        }
+      }
+    },
+    customerId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'Customer ID cannot be empty'
+        }
+      }
+    },
+    productId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'Product ID cannot be empty'
+        }
+      }
+    },
+    totalItem: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'Total item cannot be empty'
+        }
+      }
+    },
+    totalPrice: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'Total price cannot be empty'
+        }
+      }
+    },
+    orderDate: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'Order date cannot be empty'
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'User',
   });
+
   return User;
 };
